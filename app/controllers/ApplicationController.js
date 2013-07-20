@@ -1,11 +1,13 @@
 function ApplicationController() {
-  routes: [
-    {action: 'GET', route: '*', action: hello}
-  ],
-
-  hello: function (req, res) {
-    res.send('hello world')
-  }
+  this.routes = [
+    {method: 'get', path: '/', action: 'hello'},
+    {method: 'get', path: '/:name', action: 'hello'}
+  ]
 }
 
-module.exports = ApplicationController
+ApplicationController.prototype.hello = function(req, res) {
+  if (req.params.name) res.send('hello ' + req.params.name)
+  else res.send('hello world')
+}
+
+module.exports = new ApplicationController()
