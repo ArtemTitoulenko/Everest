@@ -1,7 +1,7 @@
 var express = require('express')
 var app = module.exports = express()
 
-var env = process.env['ENV'] || 'development'
+var env = process.env.MEDIUM_ENV || 'development'
 var config = require('./config/env')[env]
 
 var db = require('monk')(config.mongo.host + '/' + config.mongo.db)
@@ -13,6 +13,7 @@ app.use(function (req, res, next) {
   next()
 })
 
+// middleware that injects a reference to the redis client
 var redis = require('redis')
 var redisClient = redis.createClient()
 app.use(function (req, res, next) {

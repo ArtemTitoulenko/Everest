@@ -3,6 +3,7 @@ var fs = require('fs')
 
 module.exports = function (parent, opts) {
   fs.readdirSync(__dirname + '/app/controllers').forEach(function (name) {
+    opts.verbose && console.log('loading controller:', name)
     var controller = require(__dirname + '/app/controllers/' + name)
     var app = express()
 
@@ -18,5 +19,16 @@ module.exports = function (parent, opts) {
 
     // attach this controller to the main server app
     parent.use(app)
+  })
+
+  var models = fs.readdirSync(__dirname + '/app/models').map(function (name) {
+    opts.verbose && console.log('loading model:', name)
+    return require(__dirname + '/app/models/' + name)
+  })
+
+  // middleware that injects all of the models into a request object
+  parent.use(function (req, res, next) {
+    req.models = models
+    next()
   })
 }
