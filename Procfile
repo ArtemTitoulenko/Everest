@@ -1,3 +1,3 @@
 mongo: mongod
 redis: redis-server
-web: nodemon server.js
+web: node_modules/nodemon/nodemon.js server.js
