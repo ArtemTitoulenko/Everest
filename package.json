@@ -4,6 +4,7 @@
   "description": "The Agile Future of Publishing",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +21,9 @@
     "express": "*",
     "monk": "*",
     "redis": "*"
+  },
+
+  "devDependencies": {
+    "nodemon": "*"
   }
 }

@@ -4,7 +4,7 @@ var app = express()
 var config = require('./config/env')
 
 app.get('/', function (req, res) {
-  res.write('hello world')
+  res.send('hello world!');
 })
 
 app.listen(config.server.port)
