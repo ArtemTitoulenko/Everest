@@ -12,6 +12,7 @@ module.exports = function (parent, opts) {
     // set the routes that the controller exposes
     for (var i = 0; i < controller.routes.length; i++) {
       var route = controller.routes[i]
+      console.log(route)
       app[route.method](route.path, controller[route.action])
     }
 
