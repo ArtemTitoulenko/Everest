@@ -11,20 +11,22 @@
     "type": "git",
     "url": "https://github.com/ArtemTitoulenko/medium3.git"
   },
-  "author": ["Artem Titoulenko <artem.titoulenko@gmail.com>", "David Byrd <david@byrdhou.se>"],
+  "author": [
+    "Artem Titoulenko <artem.titoulenko@gmail.com>",
+    "David Byrd <david@byrdhou.se>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ArtemTitoulenko/medium3/issues"
   },
-
   "dependencies": {
     "express": "*",
     "monk": "*",
     "hiredis": "*",
     "redis": "*",
-    "js-schema": "0.6.2"
+    "js-schema": "0.6.2",
+    "valentine": "~1.7.0"
   },
-
   "devDependencies": {
     "nodemon": "*"
   }

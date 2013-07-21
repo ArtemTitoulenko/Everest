@@ -8,7 +8,6 @@ module.exports = {
   ],
 
   index: function (req, res) {
-    if (db.models) console.log('got models:', db.models)
     res.send('home page')
   },
 
