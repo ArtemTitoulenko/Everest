@@ -1,8 +1,13 @@
 module.exports = {
   routes: [
-    {method: 'get', path: '/:name', action: 'helloName'},
-    {method: 'get', path: /^\/$/, action: 'hello'}
+    {method: 'get', path: '/', action: 'index'},
+    {method: 'get', path: '/hello', action: 'hello'},
+    {method: 'get', path: '/hello/:name', action: 'helloName'}
   ],
+
+  index: function (req, res) {
+    res.send('home page')
+  },
 
   hello: function(req, res) {
     req.redis.incr('hello', function (err, obj) {

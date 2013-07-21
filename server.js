@@ -4,10 +4,11 @@ var app = module.exports = express()
 var env = process.env.MEDIUM_ENV || 'development'
 var config = require('./config/env')[env]
 
-var db = require('monk')(config.mongo.host + '/' + config.mongo.db)
+app.use(express.logger())
 
 // middleware which passes a reference to the db in the request object
 // there's probably a better way to do this
+var db = require('monk')(config.mongo.host + '/' + config.mongo.db)
 app.use(function (req, res, next) {
   req.db = db
   next()
@@ -25,9 +26,6 @@ app.use(function (req, res, next) {
 // set views for error and 404 pages
 app.set('views', __dirname + '/views');
 
-// serve static files
-app.use(express.static(__dirname + '/public'));
-
 // session support
 app.use(express.cookieParser(config.server.cookie_secret));
 app.use(express.session());
@@ -39,6 +37,13 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 
 require('./boot')(app, {})
+
+// serve static files
+app.use(express.static(__dirname + '/public'))
+
+app.use('*', function (req, res, next) {
+  res.send(404, '404')
+})
 
 if (!module.parent) {
   app.listen(config.server.port)
