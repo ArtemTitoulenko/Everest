@@ -21,7 +21,8 @@
     "express": "*",
     "monk": "*",
     "hiredis": "*",
-    "redis": "*"
+    "redis": "*",
+    "js-schema": "0.6.2"
   },
 
   "devDependencies": {
