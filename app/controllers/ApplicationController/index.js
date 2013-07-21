@@ -1,3 +1,5 @@
+var db = require('../../../lib/db.js').getInstance()
+
 module.exports = {
   routes: [
     {method: 'get', path: '/', action: 'index'},
@@ -6,18 +8,19 @@ module.exports = {
   ],
 
   index: function (req, res) {
+    if (db.models) console.log('got models:', db.models)
     res.send('home page')
   },
 
   hello: function(req, res) {
-    req.redis.incr('hello', function (err, obj) {
+    db.redis.incr('hello', function (err, obj) {
       console.log('hello:', obj)
     })
     res.send('hello world')
   },
 
   helloName: function(req, res) {
-    req.redis.incr('helloName', function (err, obj) {
+    db.redis.incr('helloName', function (err, obj) {
       console.log('helloName:', obj)
     })
     res.send('hello ' + req.params.name)

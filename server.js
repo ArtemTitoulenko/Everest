@@ -6,14 +6,6 @@ var config = require('./config/env')[env]
 
 app.use(express.logger())
 
-// middleware which passes a reference to the db in the request object
-// there's probably a better way to do this
-var db = require('./lib/db')(app, config)
-app.use(function (req, res, next) {
-  req.db = db
-  next()
-})
-
 // session support
 app.use(express.cookieParser(config.server.cookie_secret))
 app.use(express.session())
