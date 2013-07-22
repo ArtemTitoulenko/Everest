@@ -1,30 +1,27 @@
 function ApplicationController(db) {
-  this.db = db
-}
+  this.index = function (req, res) {
+    res.send('home page')
+  }
 
-ApplicationController.ROUTES = [
-  {method: 'get', path: '/', action: 'index'},
-  {method: 'get', path: '/hello', action: 'hello'},
-  {method: 'get', path: '/hello/:name', action: 'helloName'}
-]
+  this.hello = function (req, res) {
+    db.redis.incr('hello', function (err, obj) {
+      console.log('hello:', obj)
+    })
+    res.send('hello world')
+  }
 
-ApplicationController.prototype.index = function (req, res) {
-  console.log(this.db)
-  res.send('home page')
-}
+  this.helloName = function (req, res) {
+    db.redis.incr('helloName', function (err, obj) {
+      console.log('helloName:', obj)
+    })
+    res.send('hello ' + req.params.name)
+  }
 
-ApplicationController.prototype.hello = function (req, res) {
-  this.db.redis.incr('hello', function (err, obj) {
-    console.log('hello:', obj)
-  })
-  res.send('hello world')
-}
-
-ApplicationController.prototype.helloName = function (req, res) {
-  this.db.redis.incr('helloName', function (err, obj) {
-    console.log('helloName:', obj)
-  })
-  res.send('hello ' + req.params.name)
+  this.routes = [
+    {method: 'get', path: '/', action: this.index},
+    {method: 'get', path: '/hello', action: this.hello},
+    {method: 'get', path: '/hello/:name', action: this.helloName}
+  ]
 }
 
 module.exports = ApplicationController
