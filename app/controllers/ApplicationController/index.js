@@ -16,12 +16,13 @@ function ApplicationController(db) {
     })
     res.send('hello ' + req.params.name)
   }
-
-  this.routes = [
-    {method: 'get', path: '/', action: this.index},
-    {method: 'get', path: '/hello', action: this.hello},
-    {method: 'get', path: '/hello/:name', action: this.helloName}
-  ]
 }
+
+ApplicationController.ROUTES = [
+  {method: 'get', path: '/', action: 'index'},
+  {method: 'get', path: '/hello', action: 'hello'},
+  {method: 'get', path: '/hello/:name', action: 'helloName'}
+]
+
 
 module.exports = ApplicationController
