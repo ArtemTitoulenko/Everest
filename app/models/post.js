@@ -8,7 +8,7 @@ function Post(data) {
   var valid = schema({
     title: String,
     authorId: Number,
-    body: String // should be Array.of(Paragraph), but not yet   
+    body: String // should be Array.of(Paragraph), but not yet
   })(data)
 
   if (valid) for (var key in data) this[key] = data[key]
@@ -21,9 +21,10 @@ Post.fromJson = function(data) {
 
 module.exports = Post
 
-/* testing */
+/* testing
 var p = new Post({title: 'foo', authorId: 123, body: 'bar'})
 console.log(p)
 
 p = Post.fromJson({title: 'foo', authorId: 123, body: 'bar'})
 console.log(p)
+*/
