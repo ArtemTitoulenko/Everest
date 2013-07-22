@@ -1,5 +1,21 @@
 function ApplicationController(db) {
-  this.db = db
+  this.index = function (req, res) {
+    res.send('home page')
+  }
+
+  this.hello = function (req, res) {
+    db.redis.incr('hello', function (err, obj) {
+      console.log('hello:', obj)
+    })
+    res.send('hello world')
+  }
+
+  this.helloName = function (req, res) {
+    db.redis.incr('helloName', function (err, obj) {
+      console.log('helloName:', obj)
+    })
+    res.send('hello ' + req.params.name)
+  }
 }
 
 ApplicationController.ROUTES = [
@@ -8,23 +24,5 @@ ApplicationController.ROUTES = [
   {method: 'get', path: '/hello/:name', action: 'helloName'}
 ]
 
-ApplicationController.prototype.index = function (req, res) {
-  console.log(this.db)
-  res.send('home page')
-}
-
-ApplicationController.prototype.hello = function (req, res) {
-  this.db.redis.incr('hello', function (err, obj) {
-    console.log('hello:', obj)
-  })
-  res.send('hello world')
-}
-
-ApplicationController.prototype.helloName = function (req, res) {
-  this.db.redis.incr('helloName', function (err, obj) {
-    console.log('helloName:', obj)
-  })
-  res.send('hello ' + req.params.name)
-}
 
 module.exports = ApplicationController
