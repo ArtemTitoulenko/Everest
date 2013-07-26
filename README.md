@@ -1,4 +1,4 @@
-# Medium3
+# Everest
 
 The Agile Future of Publishing
 
